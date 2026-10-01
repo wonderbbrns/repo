@@ -1,0 +1,99 @@
+using System;
+					
+public class Program
+{
+	static double Sum(double newbalance, string[] historymas,ref int historyc)
+	{ 
+		Console.WriteLine("Внесите сумму, на которую хотите пополнить счет"); 
+		double summa =double.Parse(Console.ReadLine()); 
+		if (summa>0) 
+		{ 
+			newbalance+=summa; 
+			historymas[historyc] = "Вы внесли сумму" + summa+ "{₽}"; 
+			historyc+=1;
+		} else 
+		{ 
+			Console.WriteLine("Ошибка! Вы ввели отрицательное число или ноль, пупуппу"); 
+		} 
+		return newbalance;
+	}
+	static double minSum(double newbalance, string[] historymas,ref int historyc)
+	{ 
+		Console.WriteLine("Внесите сумму, на которую хотите вынести счет"); 
+		double minsumma =double.Parse(Console.ReadLine()); 
+		if (minsumma>0 || minsumma<newbalance) 
+		{ 
+			newbalance-=minsumma; 
+			historymas[historyc] = "Вы вынесли сумму" + minsumma+ "{₽}"; 
+			historyc+=1;
+		} else 
+		{ 
+			Console.WriteLine("Ошибка! Вы ввели отрицательное число или ноль, или же у вас недостаточно средств, пупуппу"); 
+		} 
+		return newbalance;
+	}
+	static void PrintBalance( double newbalance)
+	{
+		Console.WriteLine("Ваш баланс составляет"+ " " +  newbalance + " " + "₽");
+	}
+	static void PrintHistory( double newbalance, string[] historymas, ref int historyc)
+	{
+		if (historyc ==0)
+		{
+			Console.WriteLine("Вы не делали ничего");
+		}
+		else
+		{
+			for ( int x=0; x< historyc; x+=1)
+			{
+				Console.WriteLine(historymas[x]);
+			}
+		}
+	}
+	public static void Main()
+	{
+		Console.WriteLine("Введите ваш баланс:");
+        double newbalance = double.Parse(Console.ReadLine());
+
+        string[] history = new string[10];
+        int historyc = 0;
+
+        int choice = -1;
+
+        while (choice != 0)
+        {
+			line1:
+            Console.WriteLine("1 - Показать баланс\n 2 - Внести деньгу\n 3 - Вынести деньгу\n 4 - Показать историю действий\n 5 - Выйти");
+            choice = int.Parse(Console.ReadLine());
+			switch(choice)
+			{
+				case(1):
+					{
+						PrintBalance(newbalance);
+					}
+					goto line1;
+				case(2):
+					{
+						newbalance = Sum(newbalance,history, ref historyc);
+					}
+					goto line1;
+				case(3):
+					{
+						newbalance = minSum(newbalance,history, ref historyc);
+					}
+					goto line1;
+				case(4):
+					{
+						PrintHistory(newbalance, history, ref historyc);
+					}
+					goto line1;
+				case(5):
+					{
+						Console.WriteLine("Пока");
+					}
+					break;	
+			}
+			break;
+	}
+}
+}
