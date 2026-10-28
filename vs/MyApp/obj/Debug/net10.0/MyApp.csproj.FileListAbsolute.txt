@@ -1,0 +1,15 @@
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.AssemblyInfoInputs.cache
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.AssemblyInfo.cs
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.csproj.CoreCompileInputs.cache
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.sourcelink.json
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\bin\Debug\net10.0\MyApp.exe
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\bin\Debug\net10.0\MyApp.deps.json
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\bin\Debug\net10.0\MyApp.runtimeconfig.json
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\bin\Debug\net10.0\MyApp.dll
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\bin\Debug\net10.0\MyApp.pdb
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.dll
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\refint\MyApp.dll
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.pdb
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\MyApp.genruntimeconfig.cache
+C:\Users\imv17\OneDrive\Desktop\papochka\vs\MyApp\obj\Debug\net10.0\ref\MyApp.dll
