@@ -7,44 +7,70 @@
 
         private int power;
 
-        public string Name { get; set; }
+        public string Name => name;
 
-        public int Hp { get; set {if (value <= 0) throw new ArgumentException("Здоровье не может быть нулевым или отрицательным"); } }
-        public int Power { get; set{if (value < 0) throw new ArgumentException("Сила не может быть отрицательной"); } }
+        public int Hp => hp;
+        public int Power => power;
         public Character(string name, int hp, int power)
         {
-            Name= this.name;
-            Hp=this.hp;
-            Power= this.power;
+            if (!IsValidStats(hp, power))
+            {
+                throw new ArgumentException("Здоровье и сила удара должны быть положительными");
+            }
+            this.name = name;
+            this.hp = hp;
+            this.power = power;
+            count++;
         }
-        public void Attack(Character target)
+        public virtual void Attack(Character target)
         {
-          target.Hp -=this.Power;
-          Console.WriteLine($"{this.Name} атакует {target.Name} и наносит {this.Power} урона.");
+            target.TakeDamage(this.power);
+            Console.WriteLine($"{this.Name} атакует {target.Name} и наносит {this.Power} урона.");
         }
-        public void GetStatus()
+        public void TakeDamage(int damage)
         {
-            Console.WriteLine($"{this.Name} имеет {this.Hp} здоровья и {this.Power} силы.");
+            if (damage < 0)
+            {
+                throw new ArgumentException("Урон не может быть отрицательным");
+            }
+            hp -= damage;
+            if (hp < 0)
+            {
+                hp = 0;
+            }
+        }
+        public bool IsAlive()
+        {
+            return hp > 0;
         }
         private static int count = 0;
         public static int Count
         {
             get { return count; }
         }
-        private static void HowMany()
+        public static int HowMany()
         {
-            count++;
+            return count;
         }
-        private static void IsValidStats(int hp, int power)
+        public static bool IsValidStats(int hp, int power)
         {
-            if (hp <= 0)
+            return hp > 0 && power > 0;
+        }
+        public override string ToString()
+        {
+            return $"{this.Name} (HP: {this.Hp})";
+        }
+        public override bool Equals(object? obj)
+        {
+            if (obj is Character other)
             {
-                throw new ArgumentException("Здоровье не может быть нулевым или отрицательным");
+                return this.name == other.name;
             }
-            if (power < 0)
-            {
-                throw new ArgumentException("Сила не может быть отрицательной");
-            }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return name.GetHashCode();
         }
 
     }
@@ -54,12 +80,58 @@
         {
           
         }
+        public override void Attack(Character target)
+        {
+            target.TakeDamage(this.Power);
+            Console.WriteLine($"Игрок {this.Name} бьёт {target.Name} и наносит {this.Power} урона.");
+        }
     }
     class Enemy : Character
     {
         public Enemy(string name, int hp, int power) : base(name, hp, power)
         {
           
+        }
+        public override void Attack(Character target)
+        {
+            target.TakeDamage(this.Power);
+            Console.WriteLine($"Враг {this.Name} атакует {target.Name} и наносит {this.Power} урона.");
+        }
+    }
+    class Program
+    {
+        static void Main()
+        {
+            List<Character> characters = new List<Character>
+            {
+                new Player("Фродо", 30, 7),
+                new Enemy("Голлум", 25, 5),
+                new Player("Сэм", 28, 6 )
+            };
+
+            Console.WriteLine($"Создано персонажей: {Character.HowMany()}");
+            Console.WriteLine(characters[0]);
+            Console.WriteLine(characters[1]);
+            Console.WriteLine(characters[2]);
+            bool fight = true;
+            while (fight)
+            {
+                for (int i = 0; i < characters.Count; i++)
+                {
+                    Character attacker = characters[i];
+                    Character target = characters[(i + 1) % characters.Count];
+
+                    attacker.Attack(target);
+                    Console.WriteLine(target);
+
+                    if (!target.IsAlive())
+                    {
+                        Console.WriteLine($"Победил {attacker.Name}!");
+                        fight = false;
+                        break;
+                    }
+                }
+            }
         }
     }
 }
